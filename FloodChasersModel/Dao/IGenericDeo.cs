@@ -16,7 +16,9 @@ namespace FloodChasersModel.Dao
 
         public void Update(T entity);
 
-        public void Delete(int id);
+        public void Delete(string id);
+
+        public void DeleteAll();
         
 
     }

@@ -38,15 +38,7 @@ namespace FloodChasersAPI.Controllers
         {
             try
             {
-                var alertBound = new AlertBoundary
-                {
-                    Description = alertBoundary.Description,
-                    Headline = alertBoundary.Headline,
-                    Location = alertBoundary.Location,
-                    Metadata = alertBoundary.Metadata,
-                    Id = alertBoundary.Id
-                };
-                var newAlert = _alertService.CreateAlert(alertBound);
+                var newAlert = _alertService.CreateAlert(alertBoundary);
                 return newAlert;
             }
             catch (Exception)

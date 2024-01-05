@@ -35,7 +35,7 @@ public class GenericDao<T> :IGenericDeo<T> where T : class
         _context.SaveChanges();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
         var entity = _context.Set<T>().Find(id);
         if (entity != null)
@@ -43,5 +43,12 @@ public class GenericDao<T> :IGenericDeo<T> where T : class
             _context.Set<T>().Remove(entity);
             _context.SaveChanges();
         }
+    }
+
+    public void DeleteAll()
+    {
+        var entities  = _context.Set<T>().ToList();
+        _context.Set<T>().RemoveRange(entities);
+        _context.SaveChanges();
     }
 }

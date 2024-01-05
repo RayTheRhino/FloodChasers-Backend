@@ -26,7 +26,7 @@ namespace FloodChasersLogic.Alerts.Services
                 var alert = new Alert
                 {
                     Headline = alertBoundary.Headline,
-                    Metadata = alertBoundary.Metadata,
+                    TimeCreated = alertBoundary.TimeCreated,
                     Description = alertBoundary.Description,
                     Location = alertBoundary.Location
                 };
@@ -40,16 +40,12 @@ namespace FloodChasersLogic.Alerts.Services
             }
         }
 
-        public AlertBoundary DeleteAlertById(string alertId)
+        public void DeleteAlertById(string alertId)
         {
             try
             {
-                var alertDelete = _alertDao.GetById(alertId);
-                if(alertDelete == null) {
-                    throw new Exception("alert was not found");
-                }
-                //_alertDao.Delete(alertDelete);
-                //return
+                _alertDao.Delete(alertId);
+                return;
             }
             catch (Exception )
             {
@@ -57,9 +53,14 @@ namespace FloodChasersLogic.Alerts.Services
             }
         }
 
-        public AlertBoundary DeleteAllAlerts()
+        public void DeleteAllAlerts()
         {
-            throw new NotImplementedException();
+            try
+            {
+                _alertDao.DeleteAll();
+                return;
+            }
+            catch (Exception ) { throw; }
         }
 
         public AlertBoundary GetAlertById(string alertId)
@@ -76,7 +77,7 @@ namespace FloodChasersLogic.Alerts.Services
                     Id = alert.Id,
                     Description = alert.Description,
                     Headline = alert.Headline,
-                    Metadata = alert.Metadata,
+                    TimeCreated = alert.TimeCreated,
                     Location = alert.Location
                 };
                 
@@ -101,7 +102,7 @@ namespace FloodChasersLogic.Alerts.Services
                         Id = alert.Id,
                         Description = alert.Description,
                         Headline = alert.Headline,
-                        Metadata = alert.Metadata,
+                        TimeCreated = alert.TimeCreated,
                         Location = alert.Location
                     });
                 }
@@ -123,7 +124,7 @@ namespace FloodChasersLogic.Alerts.Services
                     throw new Exception("Alert was not found");
                 }
                 existingAlert.Headline = alertBoundary.Headline;
-                existingAlert.Metadata = alertBoundary.Metadata;
+                existingAlert.TimeCreated = alertBoundary.TimeCreated;
                 existingAlert.Location = alertBoundary.Location;
                 existingAlert.Description = alertBoundary.Description;
                 _alertDao.Update(existingAlert);

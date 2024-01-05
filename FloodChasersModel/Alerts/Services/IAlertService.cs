@@ -14,8 +14,8 @@ namespace FloodChasersModel.Alerts.Services
 
         public List<AlertBoundary>GetAllAlerts(AlertBoundary alertBoundary);
         public AlertBoundary UpdateAlert(AlertBoundary alertBoundary);
-        public AlertBoundary DeleteAlertById(string alertId);
-        public AlertBoundary DeleteAllAlerts();
+        public void DeleteAlertById(string alertId);
+        public void DeleteAllAlerts();
 
     }
 }
