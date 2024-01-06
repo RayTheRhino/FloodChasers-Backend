@@ -4,6 +4,7 @@ using FloodChasersLogic.Dao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FloodChasersLogic.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240105142949_Alerts")]
+    partial class Alerts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,15 +37,10 @@ namespace FloodChasersLogic.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LocationId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("TimeCreated")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
 
                     b.ToTable("Alerts");
                 });
@@ -55,22 +53,6 @@ namespace FloodChasersLogic.Migrations
                     b.HasKey("Url");
 
                     b.ToTable("ImageData");
-                });
-
-            modelBuilder.Entity("FloodChasersModel.Commons.Location", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("FloodChasersModel.Users.User", b =>
@@ -102,15 +84,6 @@ namespace FloodChasersLogic.Migrations
                     b.HasIndex("ProfileImageUrl");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("FloodChasersModel.Alerts.Alert", b =>
-                {
-                    b.HasOne("FloodChasersModel.Commons.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-
-                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("FloodChasersModel.Users.User", b =>

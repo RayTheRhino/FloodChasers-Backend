@@ -1,10 +1,13 @@
 using FloodChasersAPI.Data.Common;
+using FloodChasersLogic.Alerts.Services;
 using FloodChasersLogic.Dao;
 using FloodChasersLogic.Users.Services;
+using FloodChasersModel.Alerts.Services;
 using FloodChasersModel.Dao;
 using FloodChasersModel.Users.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +16,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton<IMongoClient>(serviceProvider => {
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("MongoDB");
+    return new MongoClient(connectionString);
+});
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Flood Chasesr API", Version = "v1" });
@@ -26,6 +32,7 @@ static void LoadDI(WebApplicationBuilder builder)
 {
     builder.Services.AddScoped(typeof(IGenericDeo<>), typeof(GenericDao<>));
     builder.Services.AddScoped<IUserService, UserService>();
+    builder.Services.AddScoped<IAlertService, AlertService>();
 }
 
 var app = builder.Build();

@@ -1,6 +1,7 @@
 ﻿using FloodChasersModel.Alerts;
 using FloodChasersModel.Alerts.Services;
 using FloodChasersModel.Boundaries.Alerts;
+using FloodChasersModel.Commons;
 using FloodChasersModel.Dao;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,14 @@ namespace FloodChasersLogic.Alerts.Services
                     Headline = alertBoundary.Headline,
                     TimeCreated = alertBoundary.TimeCreated,
                     Description = alertBoundary.Description,
-                    Location = alertBoundary.Location
+                    Location = new Location // Need to think on how to use it
+                    { 
+                        Latitude = 30,
+                        Longitude = 20
+                    }
                 };
                 _alertDao.Add(alert);
+                alertBoundary.TimeCreated = alert.TimeCreated;
                 alertBoundary.Id = alert.Id;
                 return alertBoundary;
 
