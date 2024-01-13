@@ -4,7 +4,6 @@ using FloodChasersModel.Alerts;
 using FloodChasersModel.Alerts.Services;
 using FloodChasersModel.Boundaries.Alerts;
 using FloodChasersModel.Commons;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using NUnit.Framework;
 using Unity;

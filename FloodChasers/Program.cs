@@ -10,7 +10,6 @@ using FloodChasersModel.Dao;
 using FloodChasersModel.Forums.Services;
 using FloodChasersModel.Posts.Services;
 using FloodChasersModel.Users.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using FloodChasersLogic.Forums.Services;
@@ -21,7 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<IMongoClient>(serviceProvider => {
