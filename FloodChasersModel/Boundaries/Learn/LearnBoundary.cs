@@ -15,7 +15,7 @@ namespace FloodChasersModel.Boundaries.Learn
         public string Content { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
-        public DateTime TimeCreated { get; set; } 
+        public DateTime TimeCreated { get; set; } = DateTime.Now;
         //public List<Comment> Comments { get; set; }
     }
 }

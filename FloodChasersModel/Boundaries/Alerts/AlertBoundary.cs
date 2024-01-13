@@ -13,6 +13,6 @@ namespace FloodChasersModel.Boundaries.Alerts
         public string Headline {  get; set; }
         public string Description { get; set; }
         public Location Location { get; set; }
-        public DateTime TimeCreated { get; set; }
+        public DateTime TimeCreated { get; set; } = DateTime.Now;
     }
 }

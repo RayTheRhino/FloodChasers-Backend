@@ -15,12 +15,14 @@ using MongoDB.Driver;
 using FloodChasersLogic.Forums.Services;
 using FloodChasersModel.Learn.Service;
 using FloodChasersLogic.Learn.Service;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<IMongoClient>(serviceProvider => {
     var configuration = serviceProvider.GetRequiredService<IConfiguration>();
@@ -44,7 +46,12 @@ static void LoadDI(WebApplicationBuilder builder)
     builder.Services.AddScoped<IForumService, ForumService>();
     builder.Services.AddScoped<ILearnService, LearnService>();
 }
-
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+builder.Services.AddAuthorization();
+builder.Services.AddControllers();
 var app = builder.Build();
 
 
@@ -57,6 +64,8 @@ app.UseSwaggerUI(c =>
 
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthorization();
 
