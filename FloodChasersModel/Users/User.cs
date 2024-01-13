@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace FloodChasersModel.Users
 {
-    [Table("Users")]
     public class User
     {
-        [Key]
         public string Id {  get; set; } = Guid.NewGuid().ToString();
         public string FirstName { get; set; }
         public string LastName { get; set; }

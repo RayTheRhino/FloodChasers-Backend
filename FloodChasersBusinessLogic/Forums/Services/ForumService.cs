@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FloodChasersLogic.Forums.Services
 {
-    internal class ForumService : IForumService
+    public class ForumService : IForumService
     {
         private IGenericDeo<Forum> _forumDao;
         public ForumService(IGenericDeo<Forum> forumDao)

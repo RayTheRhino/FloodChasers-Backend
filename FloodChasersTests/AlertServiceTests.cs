@@ -5,6 +5,7 @@ using FloodChasersModel.Alerts.Services;
 using FloodChasersModel.Boundaries.Alerts;
 using FloodChasersModel.Commons;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using NUnit.Framework;
 using Unity;
 
@@ -14,18 +15,22 @@ namespace FloodChasersTests
     public class AlertServiceTests
     {
         private IAlertService _alertService;
-        private string connectionString = "Data Source=RAYTHERHINO;Initial Catalog=FloodChasersDb;Integrated Security=True;Pooling=False;Encrypt=False;Trust Server Certificate=False";
+        private string connectionString = "mongodb://localhost:27017";
+        private MongoClient _testClient;
 
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            _alertService = new AlertService(new GenericDao<Alert>(new AppDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<AppDbContext>(UseSqlServer(connectionString)))));
-             
-            //Initialize the service
-           //var unityContainer = new UnityContainer();
-           // unityContainer.RegisterType<IAlertService,AlertService>();
-           // _alertService = unityContainer.Resolve<IAlertService>();
+            _testClient = new MongoClient(connectionString);
+            _alertService = new AlertService(new GenericDao<Alert>(_testClient));
+        }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            var database = _testClient.GetDatabase("FloodChasers");
+            database.DropCollection(typeof(Alert).Name);
         }
 
         [Test]

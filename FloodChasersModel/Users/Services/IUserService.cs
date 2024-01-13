@@ -14,7 +14,6 @@ namespace FloodChasersModel.Users.Services
 
         public void DeleteAllUsers();
 
-
         public UserBoundary GetUserById(string userId);
 
 

@@ -54,7 +54,7 @@ namespace FloodChasersLogic.Dao
 
         private string GetIdValue(T entity)
         {
-            var idProperty = typeof(T).GetProperty("Id"); // Assuming your MongoDB entities have an 'Id' property
+            var idProperty = typeof(T).GetProperty("Id"); 
             if (idProperty != null)
             {
                 var idValue = idProperty.GetValue(entity)?.ToString();

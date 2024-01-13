@@ -1,13 +1,21 @@
 using FloodChasersAPI.Data.Common;
 using FloodChasersLogic.Alerts.Services;
+using FloodChasersLogic.Comments.Services;
 using FloodChasersLogic.Dao;
+using FloodChasersLogic.Posts.Services;
 using FloodChasersLogic.Users.Services;
 using FloodChasersModel.Alerts.Services;
+using FloodChasersModel.Comments.Services;
 using FloodChasersModel.Dao;
+using FloodChasersModel.Forums.Services;
+using FloodChasersModel.Posts.Services;
 using FloodChasersModel.Users.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
+using FloodChasersLogic.Forums.Services;
+using FloodChasersModel.Learn.Service;
+using FloodChasersLogic.Learn.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +41,10 @@ static void LoadDI(WebApplicationBuilder builder)
     builder.Services.AddScoped(typeof(IGenericDeo<>), typeof(GenericDao<>));
     builder.Services.AddScoped<IUserService, UserService>();
     builder.Services.AddScoped<IAlertService, AlertService>();
+    builder.Services.AddScoped<IPostService, PostService>();
+    builder.Services.AddScoped<ICommentService, CommentService>();
+    builder.Services.AddScoped<IForumService, ForumService>();
+    builder.Services.AddScoped<ILearnService, LearnService>();
 }
 
 var app = builder.Build();

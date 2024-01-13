@@ -1,4 +1,4 @@
-﻿using FloodChasersModel.Commons;
+﻿using FloodChasersModel.Posts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace FloodChasersModel.Forums
 {
-    [Table("Forums")]
     public class Forum
     {
-        [Key]
         public string Id { get; set; }
         public List<Post> Posts { get; set; }
 
