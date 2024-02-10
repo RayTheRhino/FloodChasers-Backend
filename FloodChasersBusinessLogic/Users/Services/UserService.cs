@@ -24,8 +24,7 @@ namespace FloodChasersLogic.Users.Services
                 var user = new User
                 {
                     Email = userBoundary.Email,
-                    FirstName = userBoundary.FirstName,
-                    LastName = userBoundary.LastName,
+                    UserName = userBoundary.UserName,
                     ProfileImage = userBoundary.ProfileImage,
                     Password = password,
                 };
@@ -75,8 +74,7 @@ namespace FloodChasersLogic.Users.Services
                 return new UserBoundary
                 {
                     Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
+                    UserName = user.UserName,
                     Id = user.Id,
                     //Add image maybe
                 };
@@ -100,8 +98,7 @@ namespace FloodChasersLogic.Users.Services
                     userBoundaries.Add(new UserBoundary
                     {
                         Email = user.Email,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
+                        UserName = user.UserName,
                         Id = user.Id,
                         //Add image
                     });
@@ -119,14 +116,41 @@ namespace FloodChasersLogic.Users.Services
                 {
                     throw new Exception("User was not found");
                 }
-                exsistingUser.FirstName = userBoundary.FirstName;
-                exsistingUser.LastName = userBoundary.LastName;
+                exsistingUser.UserName = userBoundary.UserName;
                 exsistingUser.Email = userBoundary.Email;
                 //pofile image and password
                 _userDao.Update(exsistingUser);
                 return userBoundary;
             }
             catch(Exception) { throw; }
+        }
+
+        public UserBoundary TryLogin(string email, string password)
+        {
+            try
+            {
+                var user = _userDao.GetByField("Email", email);
+                if (user == null)
+                {
+                    throw new Exception("Email does not exists");
+                }
+                if (string.IsNullOrEmpty(password) || !password.Equals(user.Password))
+                {
+                    throw new Exception("Incorrect password");
+                }
+                return new UserBoundary
+                {
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    Id = user.Id,
+                    //Add image maybe
+                };
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
     }
 }

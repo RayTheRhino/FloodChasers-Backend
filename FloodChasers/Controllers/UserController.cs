@@ -48,8 +48,7 @@ namespace FloodChasersAPI.Controllers
                 var userBoundary = new UserBoundary
                 {
                     Email = createUserRequest.Email,
-                    FirstName = createUserRequest.FirstName,
-                    LastName = createUserRequest.LastName,
+                    UserName = createUserRequest.UserName,
                     //Add image later
                 };
                 var newUser = _userService.CreateUser(userBoundary, createUserRequest.Password);
@@ -115,6 +114,19 @@ namespace FloodChasersAPI.Controllers
             catch (Exception)
             {
                 throw new Exception("Could not delete all users");
+            }
+        }
+        [HttpGet]
+        [Route("Login")]
+        public UserBoundary Login(string email, string password)
+        {
+            try
+            {
+                return _userService.TryLogin(email,password);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Could not login") ;
             }
         }
     }

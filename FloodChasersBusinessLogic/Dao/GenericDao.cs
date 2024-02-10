@@ -29,6 +29,12 @@ namespace FloodChasersLogic.Dao
             return _collection.Find(filter).FirstOrDefault();
         }
 
+        public T GetByField(string field, string value)
+        {
+            var filter = Builders<T>.Filter.Eq(field, value);
+            return _collection.Find(filter).FirstOrDefault();
+        }
+
         public void Add(T entity)
         {
             _collection.InsertOne(entity);

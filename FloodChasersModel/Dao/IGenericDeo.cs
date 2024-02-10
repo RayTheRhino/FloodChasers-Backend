@@ -19,7 +19,10 @@ namespace FloodChasersModel.Dao
         public void Delete(string id);
 
         public void DeleteAll();
-        
+
+        public T GetByField(string field, string value);
+
+
 
     }
 }

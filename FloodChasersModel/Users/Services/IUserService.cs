@@ -16,10 +16,11 @@ namespace FloodChasersModel.Users.Services
 
         public UserBoundary GetUserById(string userId);
 
-
         public List<UserBoundary> GetAllUsers();
 
         public UserBoundary UpdateUser(UserBoundary userBoundary);
+
+        public UserBoundary TryLogin(string email,string password);
        
     }
 }

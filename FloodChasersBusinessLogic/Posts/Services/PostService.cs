@@ -129,7 +129,7 @@ namespace FloodChasersLogic.Posts.Services
             }
         }
 
-        private PostBoundary ToBoundary(Post post)
+        public PostBoundary ToBoundary(Post post)
         {
             var boundary = new PostBoundary();
             boundary.Title = post.Title;
