@@ -9,7 +9,6 @@ namespace FloodChasersModel.Commons
 {
     public class ImageData
     {
-        [Key]
         public string? Url { get; set; }
         //public byte[] Data { get; set; }
     }

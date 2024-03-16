@@ -16,6 +16,8 @@ using FloodChasersLogic.Forums.Services;
 using FloodChasersModel.Learn.Service;
 using FloodChasersLogic.Learn.Service;
 using Microsoft.AspNetCore.Mvc;
+using FloodChasersModel.APIs;
+using FloodChasersLogic.APIs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +41,7 @@ LoadDI(builder);
 static void LoadDI(WebApplicationBuilder builder)
 {
     builder.Services.AddScoped(typeof(IGenericDeo<>), typeof(GenericDao<>));
+    builder.Services.AddScoped<IArticleApi, ArticleApi>();
     builder.Services.AddScoped<IUserService, UserService>();
     builder.Services.AddScoped<IAlertService, AlertService>();
     builder.Services.AddScoped<IPostService, PostService>();

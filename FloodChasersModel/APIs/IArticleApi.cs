@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FloodChasersModel.Learn.Service
+namespace FloodChasersModel.APIs
 {
-    public interface ILearnService
+    public interface IArticleApi
     {
-        public Task<List<LearnBoundary>> GetAllArticles();
-        
+        public Task<List<LearnBoundary>> GetArticlesBySubject(string subject);
     }
 }
