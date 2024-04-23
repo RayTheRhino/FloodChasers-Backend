@@ -1,4 +1,5 @@
 ﻿using FloodChasersModel.Boundaries.Alerts;
+using FloodChasersModel.Commons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,6 @@ namespace FloodChasersModel.Alerts.Services
 {
     public interface IAlertService
     {
-        public AlertBoundary GetAlertById(string alertId);
-        public AlertBoundary CreateAlert(AlertBoundary alertBoundary);
-
-        public List<AlertBoundary>GetAllAlerts(AlertBoundary alertBoundary);
-        public AlertBoundary UpdateAlert(AlertBoundary alertBoundary);
-        public void DeleteAlertById(string alertId);
-        public void DeleteAllAlerts();
-
+        public Task<List<AlertBoundary>>GetAllAlerts(Location location);
     }
 }

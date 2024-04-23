@@ -1,5 +1,6 @@
 ﻿using FloodChasersModel.Alerts;
 using FloodChasersModel.Alerts.Services;
+using FloodChasersModel.APIs;
 using FloodChasersModel.Boundaries.Alerts;
 using FloodChasersModel.Commons;
 using FloodChasersModel.Dao;
@@ -13,134 +14,28 @@ namespace FloodChasersLogic.Alerts.Services
 {
     public class AlertService : IAlertService
     {
-        private readonly IGenericDeo<Alert> _alertDao;
+        private readonly IWeatherApi _weatherApi;
 
-        public AlertService(IGenericDeo<Alert> alertDao)
+        public AlertService(IWeatherApi weatherApi)
         {
-            _alertDao = alertDao;
+            _weatherApi = weatherApi;
         }
 
-        public AlertBoundary CreateAlert(AlertBoundary alertBoundary)
+        public async Task<List<AlertBoundary>> GetAllAlerts(Location location)
         {
             try
             {
-                var alert = new Alert
-                {
-                    Headline = alertBoundary.Headline,
-                    TimeCreated = alertBoundary.TimeCreated,
-                    Description = alertBoundary.Description,
-                    Location = new Location // Need to think on how to use it
-                    { 
-                        Latitude = 30,
-                        Longitude = 20
-                    }
-                };
-                _alertDao.Add(alert);
-                alertBoundary.TimeCreated = alert.TimeCreated;
-                alertBoundary.Id = alert.Id;
-                return alertBoundary;
-
-            }catch (Exception )
-            {
-                throw;
-            }
-        }
-
-        public void DeleteAlertById(string alertId)
-        {
-            try
-            {
-                _alertDao.Delete(alertId);
-                return;
-            }
-            catch (Exception )
-            {
-                throw;
-            }
-        }
-
-        public void DeleteAllAlerts()
-        {
-            try
-            {
-                _alertDao.DeleteAll();
-                return;
-            }
-            catch (Exception ) { throw; }
-        }
-
-        public AlertBoundary GetAlertById(string alertId)
-        {
-            try
-            {
-                var alert = _alertDao.GetById(alertId);
-                if( alert == null )
-                {
-                    throw new Exception("Alert was not found");
-                }
-                return new AlertBoundary
-                {
-                    Id = alert.Id,
-                    Description = alert.Description,
-                    Headline = alert.Headline,
-                    TimeCreated = alert.TimeCreated,
-                    Location = alert.Location
-                };
+                string query = !string.IsNullOrEmpty(location.City) ? location.City : location.Latitude + "," + location.Longitude;
+                var alerts = await _weatherApi.GetAlerts(query);
                 
+                return alerts;
             }
-            catch (Exception ) 
+            catch (Exception ex)
             {
-                throw;
-
-            }
-        }
-
-        public List<AlertBoundary> GetAllAlerts(AlertBoundary alertBoundary)
-        {
-            try
-            {
-                var alerts = _alertDao.GetAll();
-                var alertBoundaries = new List<AlertBoundary>();
-                foreach (var alert in alerts)
-                {
-                    alertBoundaries.Add(new AlertBoundary
-                    {
-                        Id = alert.Id,
-                        Description = alert.Description,
-                        Headline = alert.Headline,
-                        TimeCreated = alert.TimeCreated,
-                        Location = alert.Location
-                    });
-                }
-                return alertBoundaries;
-            }
-            catch (Exception)
-            {
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }
 
-        public AlertBoundary UpdateAlert(AlertBoundary alertBoundary)
-        {
-            try
-            {
-                var existingAlert = _alertDao.GetById(alertBoundary.Id);
-                if(existingAlert  == null )
-                {
-                    throw new Exception("Alert was not found");
-                }
-                existingAlert.Headline = alertBoundary.Headline;
-                existingAlert.TimeCreated = alertBoundary.TimeCreated;
-                existingAlert.Location = alertBoundary.Location;
-                existingAlert.Description = alertBoundary.Description;
-                _alertDao.Update(existingAlert);
-                
-                return alertBoundary;
-            }
-            catch (Exception)
-            { 
-                throw;
-            }
-        }
     }
 }

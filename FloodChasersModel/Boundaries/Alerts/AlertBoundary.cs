@@ -14,5 +14,9 @@ namespace FloodChasersModel.Boundaries.Alerts
         public string Description { get; set; }
         public Location Location { get; set; }
         public DateTime TimeCreated { get; set; } = DateTime.Now;
+        public DateTime EffectiveTime { get; set; }
+        public string Severity { get; set; }
+        public string Areas { get; set; }
+
     }
 }

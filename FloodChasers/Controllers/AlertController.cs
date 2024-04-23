@@ -1,5 +1,7 @@
 ﻿using FloodChasersModel.Alerts.Services;
 using FloodChasersModel.Boundaries.Alerts;
+using FloodChasersModel.Boundaries.Learn;
+using FloodChasersModel.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FloodChasersAPI.Controllers
@@ -14,38 +16,33 @@ namespace FloodChasersAPI.Controllers
             _alertService = alertService;
         }
 
+
         [HttpGet]
-        [Route("GetAlertById")]
-        public AlertBoundary GetAlertById(string alertId)
+        [Route("GetAllAlerts")]
+        public async Task<ActionResult<List<AlertBoundary>>> GetAlertsByLocation(string city, double? lat, double? lon)
         {
             try
             {
-                var alert = _alertService.GetAlertById(alertId);
-                return alert;
+                if (city == null && (!lat.HasValue || !lon.HasValue))
+                {
+                    return BadRequest("location is missing");
+                }
+                var location = new Location
+                {
+                    City = city,
+                    Latitude = lat.HasValue? lat.Value : 0,
+                    Longitude = lon.HasValue ? lat.Value : 0
+                };
+                var allAlerts = await _alertService.GetAllAlerts(location);
+                return Ok(allAlerts);
             }
-            catch (Exception)
-            {
-                throw new Exception("Faild to find alert by id");
-            }
-        }
-
-
-
-       //Create Alert
-        [HttpPost]
-        [Route("CreateAlert")]
-        public AlertBoundary CreateAlert(AlertBoundary alertBoundary)
-        {
-            try
-            {
-                var newAlert = _alertService.CreateAlert(alertBoundary);
-                return newAlert;
-            }
-            catch (Exception)
-            {
-                throw new Exception("Failed to create new Alert");
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
+                throw; 
             }
         }
+
 
     }
 }

@@ -15,7 +15,7 @@ namespace FloodChasersAPI.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetAllArticles")]
         public async Task<List<LearnBoundary>> GetArticles()
         {
