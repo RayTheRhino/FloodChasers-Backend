@@ -36,6 +36,7 @@ namespace FloodChasersAPI.Controllers
                 throw;
             }
         }
+
         [HttpPost]
         [Route("CreateUser")]
         public UserBoundary CreateUser([FromForm] FileUploadModel request)
@@ -47,8 +48,7 @@ namespace FloodChasersAPI.Controllers
                 var userBoundary = new UserBoundary
                 {
                     Email = createUserRequest.Email,
-                    FirstName = createUserRequest.FirstName,
-                    LastName = createUserRequest.LastName,
+                    UserName = createUserRequest.UserName,
                     //Add image later
                 };
                 var newUser = _userService.CreateUser(userBoundary, createUserRequest.Password);
@@ -58,6 +58,75 @@ namespace FloodChasersAPI.Controllers
             {
 
                 throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("GetAllUsers")]
+        public List<UserBoundary> GetUsers()
+        {
+            try
+            {
+                var allUsers = _userService.GetAllUsers();
+                return allUsers;
+            }
+            catch (Exception) { throw; }
+        }
+
+        [HttpPut]
+        [Route("UpdateUser")]
+        public UserBoundary UpdateUser(UserBoundary userBoundary)
+        {
+            try
+            {
+                var updatedUser = _userService.UpdateUser(userBoundary);
+                return updatedUser;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteUserById")]
+        public void DeleteUserById(string userId)
+        {
+            try
+            {
+                _userService.DeleteUserById(userId);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Could not delete user by id");
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteAllUsers")]
+        public void DeleteAllUsers()
+        {
+            try
+            {
+                _userService.DeleteAllUsers();
+               
+            }
+            catch (Exception)
+            {
+                throw new Exception("Could not delete all users");
+            }
+        }
+        [HttpGet]
+        [Route("Login")]
+        public UserBoundary Login(string email, string password)
+        {
+            try
+            {
+                return _userService.TryLogin(email,password);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Could not login") ;
             }
         }
     }
