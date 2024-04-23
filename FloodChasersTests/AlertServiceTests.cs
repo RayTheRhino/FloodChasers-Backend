@@ -1,4 +1,5 @@
 ﻿using FloodChasersLogic.Alerts.Services;
+using FloodChasersLogic.APIs;
 using FloodChasersLogic.Dao;
 using FloodChasersModel.Alerts;
 using FloodChasersModel.Alerts.Services;
@@ -22,7 +23,7 @@ namespace FloodChasersTests
         public void SetUp()
         {
             _testClient = new MongoClient(connectionString);
-            _alertService = new AlertService(new GenericDao<Alert>(_testClient));
+            _alertService = new AlertService(new WeatherApi());
         }
 
         [OneTimeTearDown]
@@ -33,28 +34,14 @@ namespace FloodChasersTests
         }
 
         [Test]
-        public void CreateAlertTest()
+        public async Task GetAllAlertsForCity()
         {
-            //arrange 
-            var alertBoundary = new AlertBoundary
+            var location = new Location
             {
-                Headline = "Headline",
-                Location = new Location
-                {
-                    Latitude = 30.5,
-                    Longitude = 32
-                },
-                Description = "Description",
-                TimeCreated = DateTime.Now,
+                City = "Rome"
             };
-
-            //act 
-            var alertCreated = _alertService.CreateAlert(alertBoundary);
-
-            //Assert
-            Assert.That(alertCreated, Is.Not.Null);
-            Assert.That(alertCreated.Id, Is.Not.Null);
-            Assert.That(alertCreated.Headline, Is.EqualTo(alertBoundary.Headline));
+            var alerts = await _alertService.GetAllAlerts(location);
+            Assert.That(alerts, Is.Not.Null);
         }
 
 
