@@ -10,9 +10,10 @@ using FloodChasersModel.Posts;
 
 namespace FloodChasersModel.Boundaries.Forum
 {
-    public class FroumBoundary
+    public class ForumBoundary
     {
         public string Id { get; set; }
+        public string Name { get; set; }
         public List<Post> Posts { get; set; }
       
     }

@@ -9,16 +9,16 @@ namespace FloodChasersModel.Forums.Services
 {
     public interface IForumService
     {
-        public FroumBoundary GetForumById(string forumId);
+        public ForumBoundary GetForumById(string forumId);
 
-        public FroumBoundary CreateForum(FroumBoundary froumBoundary);
+        public ForumBoundary CreateForum(ForumBoundary froumBoundary);
         public void DeleteForumById(string userId);
 
         public void DeleteAlForums();
 
 
-        public List<FroumBoundary> GetAllForums();
+        public List<ForumBoundary> GetAllForums();
 
-        public FroumBoundary UpdateForum(FroumBoundary froumBoundary);
+        public ForumBoundary UpdateForum(ForumBoundary froumBoundary);
     }
 }

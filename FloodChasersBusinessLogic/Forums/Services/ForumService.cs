@@ -17,13 +17,14 @@ namespace FloodChasersLogic.Forums.Services
         {
             _forumDao = forumDao;
         }
-        public FroumBoundary CreateForum(FroumBoundary froumBoundary)
+        public ForumBoundary CreateForum(ForumBoundary froumBoundary)
         {
             try
             {
                 var forum = new Forum
                 {
-                    Posts = froumBoundary.Posts
+                    Posts = froumBoundary.Posts,
+                    Name = froumBoundary.Name,
                 };
                 _forumDao.Add(forum);
                 froumBoundary.Id = forum.Id;
@@ -52,25 +53,26 @@ namespace FloodChasersLogic.Forums.Services
             } catch (Exception ) { throw; }
         }
 
-        public List<FroumBoundary> GetAllForums()
+        public List<ForumBoundary> GetAllForums()
         {
             try
             {
                 var forums = _forumDao.GetAll();
-                var forumBoundaries = new List<FroumBoundary>();
+                var forumBoundaries = new List<ForumBoundary>();
                 foreach(var forum in forums)
                 {
-                    forumBoundaries.Add(new FroumBoundary
+                    forumBoundaries.Add(new ForumBoundary
                     {
                         Id = forum.Id,
-                        Posts = forum.Posts
+                        Posts = forum.Posts,
+                        Name = forum.Name,
                     });
                 }
                 return forumBoundaries;
             }catch (Exception) { throw; }
         }
 
-        public FroumBoundary GetForumById(string forumId)
+        public ForumBoundary GetForumById(string forumId)
         {
             try
             {
@@ -79,10 +81,12 @@ namespace FloodChasersLogic.Forums.Services
                 {
                     throw new Exception("Forum was not found");
                 }
-                return new FroumBoundary
+                return new ForumBoundary
                 {
                     Posts = forum.Posts,
-                    Id = forum.Id
+                    Id = forum.Id,
+                    Name = forum.Name
+
                 };
             }
             catch (Exception )
@@ -92,7 +96,7 @@ namespace FloodChasersLogic.Forums.Services
             
         }
 
-        public FroumBoundary UpdateForum(FroumBoundary froumBoundary)
+        public ForumBoundary UpdateForum(ForumBoundary froumBoundary)
         {
             try
             {

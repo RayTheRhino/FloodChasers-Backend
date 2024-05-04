@@ -18,7 +18,7 @@ namespace FloodChasersAPI.Controllers
 
         [HttpGet]
         [Route("GetForumById")]
-        public FroumBoundary GetForumById(string ForumId)
+        public ForumBoundary GetForumById(string ForumId)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace FloodChasersAPI.Controllers
 
         [HttpPost]
         [Route("CreateForum")]
-        public FroumBoundary CreateForum(FroumBoundary forumBoundary)
+        public ForumBoundary CreateForum(ForumBoundary forumBoundary)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace FloodChasersAPI.Controllers
 
         [HttpPost]
         [Route("GetAllForums")]
-        public List<FroumBoundary> GetForums()
+        public List<ForumBoundary> GetForums()
         {
             try
             {
@@ -61,7 +61,7 @@ namespace FloodChasersAPI.Controllers
 
         [HttpPut]
         [Route("UpdateForum")]
-        public FroumBoundary UpdateForum( FroumBoundary forumBoundary)
+        public ForumBoundary UpdateForum( ForumBoundary forumBoundary)
         {
             try
             {
