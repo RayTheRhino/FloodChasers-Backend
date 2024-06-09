@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FloodChasersModel.APIs
 {
-    public interface IWeatherApi
+     public class GetAlertLocResponse
     {
-        public Task<List<AlertBoundary>> GetAlerts(string query, int days = 14, string alerts = "yes");
+        public AlertBoundary Alert { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FloodChasersModel.Boundaries.Alerts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FloodChasersModel.APIs
 {
-    public class GetAlertResponse
+    public class GetAlerstResponse
     {
-        public List<AlertResponse> Alert { get; set; }
+        public List<AlertBoundary> Alerts { get; set; }
     }
 }

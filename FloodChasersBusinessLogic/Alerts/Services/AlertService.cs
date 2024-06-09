@@ -14,18 +14,18 @@ namespace FloodChasersLogic.Alerts.Services
 {
     public class AlertService : IAlertService
     {
-        private readonly IWeatherApi _weatherApi;
+        private IGenericDeo<Alert> _alertService;
 
-        public AlertService(IWeatherApi weatherApi)
+        public AlertService(IGenericDeo<Alert> alertService)
         {
-            _weatherApi = weatherApi;
+            _alertService = alertService;
         }
 
         public async Task<List<AlertBoundary>> GetAllAlerts(Location location)
         {
             try
             {
-                string query = !string.IsNullOrEmpty(location.City) ? location.City : location.Latitude + "," + location.Longitude;
+                
                 var alerts = await _weatherApi.GetAlerts(query);
                 
                 return alerts;
@@ -37,5 +37,9 @@ namespace FloodChasersLogic.Alerts.Services
             }
         }
 
+        public Task<List<AlertBoundary>> GetAllAlerts(Location location)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace FloodChasersLogic.APIs
                         // Read the response content as a string
                         GetArticlesResponse articleResponse = JsonSerializer.Deserialize<GetArticlesResponse>(responseBody,new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
                         var articles = articleResponse?.Articles;
+                        
                         if (articles == null)
                         {
                             Console.WriteLine("I am null");

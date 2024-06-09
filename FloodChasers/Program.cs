@@ -42,7 +42,7 @@ static void LoadDI(WebApplicationBuilder builder)
 {
     builder.Services.AddScoped(typeof(IGenericDeo<>), typeof(GenericDao<>));
     builder.Services.AddScoped<IArticleApi, ArticleApi>();
-    builder.Services.AddScoped<IWeatherApi, WeatherApi>();
+    builder.Services.AddScoped<IAlertApi, AlertsApi>();
     builder.Services.AddScoped<IUserService, UserService>();
     builder.Services.AddScoped<IAlertService, AlertService>();
     builder.Services.AddScoped<IPostService, PostService>();

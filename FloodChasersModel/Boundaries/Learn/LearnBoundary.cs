@@ -10,8 +10,6 @@ namespace FloodChasersModel.Boundaries.Learn
 {
     public class LearnBoundary
     {
-       // public string Id { get; set; } 
-
         public string UrlToImage { get; set; }
         public string Content { get; set; }
         public string Title { get; set; }
