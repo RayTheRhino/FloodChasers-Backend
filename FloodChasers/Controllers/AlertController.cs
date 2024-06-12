@@ -19,21 +19,11 @@ namespace FloodChasersAPI.Controllers
 
         [HttpGet]
         [Route("GetAllAlerts")]
-        public async Task<ActionResult<List<AlertBoundary>>> GetAlertsByLocation(string city, double? lat, double? lon)
+        public async Task<ActionResult<List<AlertBoundary>>> GetAllAlerts()
         {
             try
             {
-                if (city == null && (!lat.HasValue || !lon.HasValue))
-                {
-                    return BadRequest("location is missing");
-                }
-                var location = new Location
-                {
-                    City = city,
-                    Latitude = lat.HasValue? lat.Value : 0,
-                    Longitude = lon.HasValue ? lat.Value : 0
-                };
-                var allAlerts = await _alertService.GetAllAlerts(location);
+                var allAlerts = await _alertService.GetAllAlerts();
                 return Ok(allAlerts);
             }
             catch (Exception ex) 

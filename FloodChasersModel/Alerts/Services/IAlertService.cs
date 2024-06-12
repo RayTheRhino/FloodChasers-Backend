@@ -10,6 +10,7 @@ namespace FloodChasersModel.Alerts.Services
 {
     public interface IAlertService
     {
-        public Task<List<AlertBoundary>>GetAllAlerts(Location location);
+        public Task<List<AlertBoundary>> GetAllAlerts();
+        public Task<AlertBoundary> GetAlertsByLatLang(double lat, double lon);
     }
 }

@@ -11,10 +11,14 @@ namespace FloodChasersModel.Alerts
 {
     public class Alert
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string? Id { get; set; }
         public string Headline { get; set; }
-        public string? Description { get; set; }
-        public Location Location { get; set; } 
-        public DateTime TimeCreated { get; set; } = DateTime.Now;
+        public string Description { get; set; }
+        public DateTime TimeCreated { get; set; }
+        public DateTime TimeUpdated { get; set; }
+        public string Serverity { get; set; }
+        public string Areas { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
     }
 }

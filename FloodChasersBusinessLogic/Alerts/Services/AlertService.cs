@@ -1,4 +1,5 @@
-﻿using FloodChasersModel.Alerts;
+﻿using FloodChasersLogic.APIs;
+using FloodChasersModel.Alerts;
 using FloodChasersModel.Alerts.Services;
 using FloodChasersModel.APIs;
 using FloodChasersModel.Boundaries.Alerts;
@@ -21,23 +22,19 @@ namespace FloodChasersLogic.Alerts.Services
             _alertService = alertService;
         }
 
-        public async Task<List<AlertBoundary>> GetAllAlerts(Location location)
+        public AlertService(AlertsApi alertsApi)
         {
-            try
-            {
-                
-                var alerts = await _weatherApi.GetAlerts(query);
-                
-                return alerts;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
+            AlertsApi = alertsApi;
         }
 
-        public Task<List<AlertBoundary>> GetAllAlerts(Location location)
+        public AlertsApi AlertsApi { get; }
+
+        public Task<AlertBoundary> GetAlertsByLatLang(double lat, double lon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<AlertBoundary>> GetAllAlerts()
         {
             throw new NotImplementedException();
         }
