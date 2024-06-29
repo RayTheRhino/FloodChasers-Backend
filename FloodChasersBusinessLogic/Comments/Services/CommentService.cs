@@ -99,7 +99,7 @@ namespace FloodChasersLogic.Comments.Services
             boundary.Body = comment.Body;
             boundary.TimeCreated = comment.TimeCreated;
             boundary.Title = comment.Title;
-            boundary.CommentImage = comment.CommentImage;
+            //boundary.CommentImage = comment.CommentImage;
             boundary.Id = comment.Id;
             boundary.Comments = GetCommentsById(comment.CommentsIds);
             return boundary;
@@ -123,7 +123,7 @@ namespace FloodChasersLogic.Comments.Services
                 Title = boundary.Title,
                 Body = boundary.Body,
                 TimeCreated = boundary.TimeCreated,
-                CommentImage = boundary.CommentImage,
+                //CommentImage = boundary.CommentImage,
                 CommentsIds = boundary.Comments.Select(x => x.Id).ToList()
             };
             return entity;

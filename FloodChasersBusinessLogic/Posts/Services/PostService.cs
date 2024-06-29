@@ -159,7 +159,7 @@ namespace FloodChasersLogic.Posts.Services
                 Body = boundary.Body,
                 TimeCreated = boundary.TimeCreated,
                 CommentsIds = boundary.Comments.Select(x => x.Id).ToList(),
-                ImageData = boundary.ImageData,
+                //ImageData = boundary.ImageData,
             };
             return entity;
 

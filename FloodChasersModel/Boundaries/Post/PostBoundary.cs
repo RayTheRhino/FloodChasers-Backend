@@ -12,7 +12,7 @@ namespace FloodChasersModel.Boundaries.Posts
     public class PostBoundary
     {
         public string? Id { get; set; } 
-        public ImageData ImageData { get; set; }
+        //public ImageData ImageData { get; set; }
         public string Body { get; set; }
         public string Title { get; set; }
         public DateTime TimeCreated { get; set; } = DateTime.Now;

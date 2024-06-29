@@ -14,7 +14,7 @@ namespace FloodChasersModel.Boundaries.Comments
         public DateTime TimeCreated { get; set; } = DateTime.Now;
         public string Body { get; set; }
         public string Title { get; set; }
-        public ImageData CommentImage { get; set; }
+        //public ImageData CommentImage { get; set; }
         public List<CommentBoundary> Comments { get; set; } = new List<CommentBoundary>();
     }
 }
