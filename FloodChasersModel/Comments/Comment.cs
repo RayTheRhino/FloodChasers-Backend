@@ -16,6 +16,5 @@ namespace FloodChasersModel.Comments
         public string Body { get; set; }
         public string Title { get; set; }
         public ImageData? CommentImage { get; set; }
-        public List<string> CommentsIds { get; set; } = new List<string>();
     }
 }

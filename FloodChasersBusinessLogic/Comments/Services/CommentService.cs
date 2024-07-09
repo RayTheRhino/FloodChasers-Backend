@@ -101,7 +101,6 @@ namespace FloodChasersLogic.Comments.Services
             boundary.Title = comment.Title;
             //boundary.CommentImage = comment.CommentImage;
             boundary.Id = comment.Id;
-            boundary.Comments = GetCommentsById(comment.CommentsIds);
             return boundary;
 
         }
@@ -124,7 +123,6 @@ namespace FloodChasersLogic.Comments.Services
                 Body = boundary.Body,
                 TimeCreated = boundary.TimeCreated,
                 //CommentImage = boundary.CommentImage,
-                CommentsIds = boundary.Comments.Select(x => x.Id).ToList()
             };
             return entity;
 
@@ -140,7 +138,6 @@ namespace FloodChasersLogic.Comments.Services
                     throw new Exception($"Comment with id: {commentId} does not exists");
                 }
                 var newCommentWithId = CreateComment(newCommentBoundary);
-                commentParent.CommentsIds.Add(newCommentWithId.Id);
                 _commentDao.Update(commentParent);
                 return ToBoundary(commentParent);
 
