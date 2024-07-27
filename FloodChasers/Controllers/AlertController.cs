@@ -32,6 +32,21 @@ namespace FloodChasersAPI.Controllers
                 throw; 
             }
         }
+        [HttpGet]
+        [Route("GetAlertsByArea")]
+        public async Task<ActionResult<List<AlertBoundary>>> GetAlertsByArea(string area)
+        {
+            try
+            {
+                var allAlerts = await _alertService.GetAlertsByArea(area);
+                return Ok(allAlerts);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
 
 
     }

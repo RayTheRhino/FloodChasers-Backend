@@ -13,13 +13,13 @@ namespace FloodChasersTests
     [TestFixture]
     public class CommentServiceTests
     {
-        private Mock<IGenericDeo<Comment>>? mockCommentDao;
+        private Mock<IGenericDao<Comment>>? mockCommentDao;
         private CommentService? commentService;
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            mockCommentDao = new Mock<IGenericDeo<Comment>>();
+            mockCommentDao = new Mock<IGenericDao<Comment>>();
             commentService = new CommentService(mockCommentDao.Object);
         }
         [Test]

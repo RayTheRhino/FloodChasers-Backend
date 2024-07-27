@@ -10,6 +10,6 @@ namespace FloodChasersModel.APIs
     public interface IAlertApi
     {
         public Task<List<AlertBoundary>> GetAllAlerts();
-        public Task<AlertBoundary> GetAlertsByLatLang(double lat, double lon);
+        public Task<List<AlertBoundary>> GetAlertsByArea(string area);
     }
 }

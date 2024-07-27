@@ -12,8 +12,8 @@ namespace FloodChasersLogic.Forums.Services
 {
     public class ForumService : IForumService
     {
-        private IGenericDeo<Forum> _forumDao;
-        public ForumService(IGenericDeo<Forum> forumDao)
+        private IGenericDao<Forum> _forumDao;
+        public ForumService(IGenericDao<Forum> forumDao)
         {
             _forumDao = forumDao;
         }

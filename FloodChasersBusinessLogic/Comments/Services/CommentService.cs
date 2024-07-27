@@ -15,9 +15,9 @@ namespace FloodChasersLogic.Comments.Services
 {
     public class CommentService : ICommentService
     {
-        private IGenericDeo<Comment> _commentDao;
+        private IGenericDao<Comment> _commentDao;
 
-        public CommentService(IGenericDeo<Comment> commentDao) 
+        public CommentService(IGenericDao<Comment> commentDao) 
         {
             _commentDao = commentDao; 
         }

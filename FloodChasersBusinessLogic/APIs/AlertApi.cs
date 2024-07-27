@@ -15,13 +15,13 @@ namespace FloodChasersLogic.APIs
     public class AlertsApi : IAlertApi
 
     {
-        public async Task<AlertBoundary> GetAlertsByLatLang(double lat,double lon)
+        public async Task<List<AlertBoundary>> GetAlertsByArea(string area)
         {
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
-                    string url = $"https://localhost:7233/Alerts/GetAlertByLocation?lat={lat}&lang={lon}";
+                    string url = $"https://localhost:7233/Alerts/GetAlertByLocation?area={area}";
                     var request = new HttpRequestMessage
                     {
                         // Set HTTP method and URL
@@ -36,13 +36,12 @@ namespace FloodChasersLogic.APIs
                     if (response.IsSuccessStatusCode)
                     {
                         // Read the response content as a string
-                        GetAlertLocResponse alertResponse = JsonSerializer.Deserialize<GetAlertLocResponse>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        var alert = alertResponse?.Alert;
-                        if (alert == null)
+                        List<AlertBoundary> alerts = JsonSerializer.Deserialize<List<AlertBoundary>>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        if (alerts == null)
                         {
                             Console.WriteLine("No alerts found");
                         }
-                        return alert;
+                        return alerts;
                     }
                     else
                     {
@@ -79,8 +78,7 @@ namespace FloodChasersLogic.APIs
                     if (response.IsSuccessStatusCode)
                     {
                         // Read the response content as a string
-                        GetAlerstResponse alertResponse = JsonSerializer.Deserialize<GetAlerstResponse>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        var alerts = alertResponse?.Alerts;
+                        List<AlertBoundary> alerts = JsonSerializer.Deserialize<List<AlertBoundary>>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                         if (alerts == null || !alerts.Any())
                         {
                             Console.WriteLine("No alerts found");

@@ -15,28 +15,21 @@ namespace FloodChasersLogic.Alerts.Services
 {
     public class AlertService : IAlertService
     {
-        private IGenericDeo<Alert> _alertService;
+        private IAlertApi _alertApi;
 
-        public AlertService(IGenericDeo<Alert> alertService)
+        public AlertService(IAlertApi alertApi)
         {
-            _alertService = alertService;
+            _alertApi = alertApi;
         }
 
-        public AlertService(AlertsApi alertsApi)
+        public async Task<List<AlertBoundary>> GetAlertsByArea(string area)
         {
-            AlertsApi = alertsApi;
+            return await _alertApi.GetAlertsByArea(area);
         }
 
-        public AlertsApi AlertsApi { get; }
-
-        public Task<AlertBoundary> GetAlertsByLatLang(double lat, double lon)
+        public async Task<List<AlertBoundary>> GetAllAlerts()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<AlertBoundary>> GetAllAlerts()
-        {
-            throw new NotImplementedException();
+            return await _alertApi.GetAllAlerts();
         }
     }
 }

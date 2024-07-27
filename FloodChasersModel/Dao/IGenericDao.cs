@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FloodChasersModel.Dao
 {
-    public interface IGenericDeo<T> where T : class
+    public interface IGenericDao<T> where T : class
     {
         public IQueryable<T> GetAll();
 

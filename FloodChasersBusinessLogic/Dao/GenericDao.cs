@@ -6,7 +6,7 @@ using MongoDB.Driver;
 
 namespace FloodChasersLogic.Dao
 {
-    public class GenericDao<T> : IGenericDeo<T> where T : class
+    public class GenericDao<T> : IGenericDao<T> where T : class
     {
         private readonly IMongoClient _client;
         private readonly IMongoCollection<T> _collection;

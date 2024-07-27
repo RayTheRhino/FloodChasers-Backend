@@ -12,8 +12,8 @@ namespace FloodChasersLogic.Users.Services
 {
     public class UserService : IUserService
     {
-        private readonly IGenericDeo<User> _userDao;
-        public UserService(IGenericDeo<User> userDao)
+        private readonly IGenericDao<User> _userDao;
+        public UserService(IGenericDao<User> userDao)
         {
             _userDao = userDao;
         }

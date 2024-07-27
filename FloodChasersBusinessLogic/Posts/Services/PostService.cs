@@ -15,10 +15,10 @@ namespace FloodChasersLogic.Posts.Services
 {
     public class PostService : IPostService
     {
-        private IGenericDeo<Post> _postDao;
+        private IGenericDao<Post> _postDao;
         private ICommentService _commentService;
 
-        public PostService(ICommentService commentService, IGenericDeo<Post> postDao)
+        public PostService(ICommentService commentService, IGenericDao<Post> postDao)
         {
             _commentService = commentService;
             _postDao = postDao;
