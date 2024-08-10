@@ -54,5 +54,7 @@ namespace FloodChasersTests
             commentService?.DeleteAllComments();
             mockCommentDao?.Verify(dao => dao.DeleteAll(), Times.Once);
         }
+
+
     }
 }
