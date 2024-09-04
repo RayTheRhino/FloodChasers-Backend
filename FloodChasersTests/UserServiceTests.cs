@@ -31,11 +31,11 @@ namespace FloodChasersTests
             _userService = new UserService(new GenericDao<User>(_testClient));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             var database = _testClient.GetDatabase("FloodChasers");
-            database.DropCollection(typeof(Alert).Name);
+            database.DropCollection(typeof(User).Name);
         }
 
         [Test]
@@ -112,11 +112,10 @@ namespace FloodChasersTests
 
             //act
             _userService.DeleteUserById(createdUser.Id);
-            var responseUser = _userService.GetUserById(createdUser.Id);
 
 
             //assert
-            Assert.That(responseUser, Is.Null);
+            Assert.Throws<Exception>(() => _userService.GetUserById(createdUser.Id));
         }
 
         [Test]
@@ -177,10 +176,9 @@ namespace FloodChasersTests
             _userService.CreateUser(userBoundary, "correctpassword");
 
             // Act
-            var loggedInUser = _userService.TryLogin("test8@gmail.com", "wrongpassword");
 
             // Assert
-            Assert.That(loggedInUser, Is.Null);
+            Assert.Throws<Exception>(() => _userService.TryLogin("test8@gmail.com", "wrongpassword"));
         }
     }
 }
